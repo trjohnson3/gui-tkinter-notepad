@@ -1,5 +1,6 @@
 import tkinter
-from tkinter import StringVar, IntVar
+from tkinter import StringVar, IntVar, scrolledtext
+import tkinter.scrolledtext
 from PIL import ImageTk, Image
 
 #Define window
@@ -67,6 +68,15 @@ font_option_drop = tkinter.OptionMenu(menu_frame, font_option, *options)
 font_option.set('None')
 font_option_drop.config(width=5)
 font_option_drop.grid(row=0, column=6, padx=5, pady=5)
+
+#Layout for text frame
+my_font = (font_family.get(), font_size.get())
+#Create input text as a scroll text widget
+#Set default height and width to be larger than the window so that on the smallest
+#font size, the windo is constant
+input_text = tkinter.scrolledtext.ScrolledText(text_frame, bg=text_color, font=my_font,
+                                               width=1000, height=100)
+input_text.pack()
 
 #Run app
 root.mainloop()
