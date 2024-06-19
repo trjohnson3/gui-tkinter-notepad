@@ -26,7 +26,9 @@ text_frame.pack(padx=5, pady=5)
 
 #Layout for menu frame
 #create menu with new, open, save, close, font family, font size, font option
-
+new_image = ImageTk.PhotoImage(Image.open('./images/new.png'))
+new_button = tkinter.Button(menu_frame, image=new_image)
+new_button.grid(row=0, column=0, padx=5, pady=5)
 
 
 #Run app
