@@ -17,6 +17,17 @@ root_color = '#6c809a'
 root.config(bg= root_color)
 
 #Define functions
+#event parameter is automitically passed by the dropdown, so it must be included
+# the function declaration
+def change_font(event):
+    '''Change the given font based on drop box options'''
+    if font_option.get() == 'None':
+        my_font = (font_family.get(), font_size.get())
+    else:
+        my_font = (font_family.get(), font_size.get(), font_option.get())
+    
+    #Change font style
+    input_text.config(font=my_font)
 
 
 #GUI layout
@@ -49,7 +60,7 @@ close_button.grid(row=0, column=3, padx=5, pady=5)
 families = ['Terminal', 'Modern', 'Script', 'Courier', 'Arial', 'Calibri', 'Cambria',
             'Georgia', 'MS Gothic', 'SimSun', 'Times New Roman', 'Verdana', 'Wingdings']
 font_family = StringVar()
-font_family_drop = tkinter.OptionMenu(menu_frame, font_family, *families)
+font_family_drop = tkinter.OptionMenu(menu_frame, font_family, *families, command=change_font)
 font_family.set('terminal')
 font_family_drop.config(width=16)
 font_family_drop.grid(row=0, column=4, padx=5, pady=5)
@@ -57,14 +68,14 @@ font_family_drop.grid(row=0, column=4, padx=5, pady=5)
 #Create a list of font sizes
 sizes = [8, 10, 12, 14, 16, 20, 24, 32, 48, 64, 72, 96]
 font_size = IntVar()
-font_size_drop = tkinter.OptionMenu(menu_frame, font_size, *sizes)
+font_size_drop = tkinter.OptionMenu(menu_frame, font_size, *sizes, command=change_font)
 font_size.set(12)
 font_size_drop.config(width=2)
 font_size_drop.grid(row=0, column=5, padx=5, pady=5)
 
-options = ['None', 'Bold', 'Italics']
+options = ['None', 'bold', 'italic']
 font_option = StringVar()
-font_option_drop = tkinter.OptionMenu(menu_frame, font_option, *options)
+font_option_drop = tkinter.OptionMenu(menu_frame, font_option, *options, command=change_font)
 font_option.set('None')
 font_option_drop.config(width=5)
 font_option_drop.grid(row=0, column=6, padx=5, pady=5)
