@@ -18,7 +18,11 @@ root.config(bg= root_color)
 
 #GUI layout
 #Create frames
+menu_frame = tkinter.Frame(root, bg=menu_color)
+text_frame = tkinter.Frame(root, bg=text_color)
 
+menu_frame.pack(padx=5, pady=5)
+text_frame.pack(padx=5, pady=5)
 
 #Run app
 root.mainloop()
