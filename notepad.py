@@ -61,5 +61,12 @@ font_size.set(12)
 font_size_drop.config(width=2)
 font_size_drop.grid(row=0, column=5, padx=5, pady=5)
 
+options = ['None', 'Bold', 'Italics']
+font_option = StringVar()
+font_option_drop = tkinter.OptionMenu(menu_frame, font_option, *options)
+font_option.set('None')
+font_option_drop.config(width=5)
+font_option_drop.grid(row=0, column=6, padx=5, pady=5)
+
 #Run app
 root.mainloop()
