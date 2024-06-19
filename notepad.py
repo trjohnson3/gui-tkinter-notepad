@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import StringVar
+from tkinter import StringVar, IntVar
 from PIL import ImageTk, Image
 
 #Define window
@@ -50,9 +50,16 @@ families = ['Terminal', 'Modern', 'Script', 'Courier', 'Arial', 'Calibri', 'Camb
 font_family = StringVar()
 font_family_drop = tkinter.OptionMenu(menu_frame, font_family, *families)
 font_family.set('terminal')
-#Set width to hold longest font and remain constant
 font_family_drop.config(width=16)
-font_family_drop.grid(row=0, column=4)
+font_family_drop.grid(row=0, column=4, padx=5, pady=5)
+
+#Create a list of font sizes
+sizes = [8, 10, 12, 14, 16, 20, 24, 32, 48, 64, 72, 96]
+font_size = IntVar()
+font_size_drop = tkinter.OptionMenu(menu_frame, font_size, *sizes)
+font_size.set(12)
+font_size_drop.config(width=2)
+font_size_drop.grid(row=0, column=5, padx=5, pady=5)
 
 #Run app
 root.mainloop()
