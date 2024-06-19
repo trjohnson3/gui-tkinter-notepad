@@ -1,7 +1,8 @@
 import tkinter
-from tkinter import StringVar, IntVar, scrolledtext
+from tkinter import StringVar, IntVar, END
 import tkinter.scrolledtext
 from PIL import ImageTk, Image
+from tkinter import messagebox
 
 #Define window
 root = tkinter.Tk()
@@ -29,6 +30,24 @@ def change_font(event):
     #Change font style
     input_text.config(font=my_font)
 
+def new_note():
+    '''Create a new note, essentially clears the screen'''
+    #Use messsage box to check yes/no on new note w.o saving
+    question = messagebox.askyesno("New Note", 'Are you sure you want to start a new note?')
+    if question:
+        #Scrolled text widgets starting index is 1.0, not 0!
+        input_text.delete(1.0, END)
+
+def close_note():
+    '''Close program'''
+    #Use messsage box to check yes/no on new note w.o saving
+    question = messagebox.askyesno("Close Note", 'Are you sure you want to start a close note?')
+    if question:
+        #Scrolled text widgets starting index is 1.0, not 0!
+        root.destroy()
+
+
+
 
 #GUI layout
 #Create frames
@@ -40,7 +59,7 @@ text_frame.pack(padx=5, pady=5)
 #Layout for menu frame
 #create menu with new, open, save, close, font family, font size, font option
 new_image = ImageTk.PhotoImage(Image.open('./images/new.png'))
-new_button = tkinter.Button(menu_frame, image=new_image)
+new_button = tkinter.Button(menu_frame, image=new_image, command=new_note)
 new_button.grid(row=0, column=0, padx=5, pady=5)
 
 open_image = ImageTk.PhotoImage(Image.open('./images/open.png'))
@@ -53,7 +72,7 @@ save_button.grid(row=0, column=2, padx=5, pady=5)
 
 close_image = ImageTk.PhotoImage(Image.open('./images/close.png'))
 close_button = tkinter.Button(menu_frame, image=close_image,
-                              command=root.destroy)
+                              command=close_note)
 close_button.grid(row=0, column=3, padx=5, pady=5)
 
 #Create a list of fonts to use
