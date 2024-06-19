@@ -30,6 +30,18 @@ new_image = ImageTk.PhotoImage(Image.open('./images/new.png'))
 new_button = tkinter.Button(menu_frame, image=new_image)
 new_button.grid(row=0, column=0, padx=5, pady=5)
 
+open_image = ImageTk.PhotoImage(Image.open('./images/open.png'))
+open_button = tkinter.Button(menu_frame, image=open_image)
+open_button.grid(row=0, column=1, padx=5, pady=5)
+
+save_image = ImageTk.PhotoImage(Image.open('./images/save.png'))
+save_button = tkinter.Button(menu_frame, image=save_image)
+save_button.grid(row=0, column=2, padx=5, pady=5)
+
+close_image = ImageTk.PhotoImage(Image.open('./images/close.png'))
+close_button = tkinter.Button(menu_frame, image=close_image,
+                              command=root.destroy)
+close_button.grid(row=0, column=3, padx=5, pady=5)
 
 #Run app
 root.mainloop()
