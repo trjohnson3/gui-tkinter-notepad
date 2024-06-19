@@ -1,4 +1,5 @@
 import tkinter
+from PIL import ImageTk, Image
 
 #Define window
 root = tkinter.Tk()
@@ -20,9 +21,13 @@ root.config(bg= root_color)
 #Create frames
 menu_frame = tkinter.Frame(root, bg=menu_color)
 text_frame = tkinter.Frame(root, bg=text_color)
-
 menu_frame.pack(padx=5, pady=5)
 text_frame.pack(padx=5, pady=5)
+
+#Layout for menu frame
+#create menu with new, open, save, close, font family, font size, font option
+
+
 
 #Run app
 root.mainloop()
