@@ -1,4 +1,5 @@
 import tkinter
+from tkinter import StringVar
 from PIL import ImageTk, Image
 
 #Define window
@@ -42,6 +43,16 @@ close_image = ImageTk.PhotoImage(Image.open('./images/close.png'))
 close_button = tkinter.Button(menu_frame, image=close_image,
                               command=root.destroy)
 close_button.grid(row=0, column=3, padx=5, pady=5)
+
+#Create a list of fonts to use
+families = ['Terminal', 'Modern', 'Script', 'Courier', 'Arial', 'Calibri', 'Cambria',
+            'Georgia', 'MS Gothic', 'SimSun', 'Times New Roman', 'Verdana', 'Wingdings']
+font_family = StringVar()
+font_family_drop = tkinter.OptionMenu(menu_frame, font_family, *families)
+font_family.set('terminal')
+#Set width to hold longest font and remain constant
+font_family_drop.config(width=16)
+font_family_drop.grid(row=0, column=4)
 
 #Run app
 root.mainloop()
