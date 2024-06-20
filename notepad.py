@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import StringVar, IntVar, END
+from tkinter import StringVar, IntVar, END, filedialog
 import tkinter.scrolledtext
 from PIL import ImageTk, Image
 from tkinter import messagebox
@@ -30,6 +30,7 @@ def change_font(event):
     #Change font style
     input_text.config(font=my_font)
 
+
 def new_note():
     '''Create a new note, essentially clears the screen'''
     #Use messsage box to check yes/no on new note w.o saving
@@ -38,14 +39,50 @@ def new_note():
         #Scrolled text widgets starting index is 1.0, not 0!
         input_text.delete(1.0, END)
 
+
 def close_note():
-    '''Close program'''
+    '''Closes the note, essentially closing the program'''
     #Use messsage box to check yes/no on new note w.o saving
-    question = messagebox.askyesno("Close Note", 'Are you sure you want to start a close note?')
+    question = messagebox.askyesno("Close Note", 'Are you sure you want to close notepad?')
     if question:
+
         #Scrolled text widgets starting index is 1.0, not 0!
         root.destroy()
 
+
+def save_note():
+    '''Save given note. First three lines are saved as font family, size, and option.'''
+    #Use filedialog to get location and name of where/what to save teh file
+    save_name = filedialog.asksaveasfilename(initialdir="./", title='Save Note', defaultextension=".txt",
+                                         filetypes=(("Text files", '*.txt'), ('All files', ('*.*'))))
+    with open(save_name, 'w') as f:
+        #first 3 lines hold font family, size, and option (cast size to a string)
+        f.write(font_family.get() + '\n')
+        f.write(str(font_size.get()) + '\n')
+        f.write(font_option.get() + '\n')
+        #write remining text to the file
+        f.write(input_text.get('1.0', END))
+        f.close()
+
+
+def open_note():
+    '''Open a previously saved note. Should set the font family, size, and option'''
+    #First set font, then load text
+    open_name = filedialog.askopenfilename(initialdir="./", title='Save Note',
+                                         filetypes=(("Text files", '*.txt'), ('All files', ('*.*'))))
+    with open(open_name, 'r') as f:
+        #clear current text
+        input_text.delete('1.0', END)
+        #First 3 lines are font family, size, and option
+        #Must strip \n from end of line
+        font_family.set(f.readline().strip())
+        font_size.set(int(f.readline().strip()))
+        font_option.set(f.readline().strip())
+        #Call change font and pass an arbitrary value
+        change_font(1)
+        #read rest of ile and insert into text field
+        text = f.read()
+        input_text.insert('1.0', text)
 
 
 
@@ -63,11 +100,11 @@ new_button = tkinter.Button(menu_frame, image=new_image, command=new_note)
 new_button.grid(row=0, column=0, padx=5, pady=5)
 
 open_image = ImageTk.PhotoImage(Image.open('./images/open.png'))
-open_button = tkinter.Button(menu_frame, image=open_image)
+open_button = tkinter.Button(menu_frame, image=open_image, command=open_note)
 open_button.grid(row=0, column=1, padx=5, pady=5)
 
 save_image = ImageTk.PhotoImage(Image.open('./images/save.png'))
-save_button = tkinter.Button(menu_frame, image=save_image)
+save_button = tkinter.Button(menu_frame, image=save_image, command=save_note)
 save_button.grid(row=0, column=2, padx=5, pady=5)
 
 close_image = ImageTk.PhotoImage(Image.open('./images/close.png'))
